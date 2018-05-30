@@ -1,6 +1,6 @@
 import request from 'superagent'
 
-const apikey = 'd7a26a70'
+const apikey = 'your_key'
 const baseUrl = `http://www.omdbapi.com/?apikey=${apikey}`
 
 
