@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import { fetchpageOne,
+import { fetchAllMovie,
         chooseOneMovie } from '../../../redux/actions/getData'
 import  Detail  from './Detail';
 
@@ -21,7 +21,7 @@ class Overview extends React.Component {
 
 
     componentWillMount() {
-      this.props.fetchpageOne()
+      this.props.fetchAllMovie()
     }
 
 
@@ -53,4 +53,4 @@ const mapStateToProps = (state) => ({
 })
 
 export default connect(mapStateToProps,
-       {fetchpageOne, chooseOneMovie})(Overview)
+       {fetchAllMovie, chooseOneMovie})(Overview)

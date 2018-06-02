@@ -1,14 +1,14 @@
 import request from 'superagent'
 
-const apikey = 'd7a26a70'
+const apikey = 'your_key'
 const baseUrl = `http://www.omdbapi.com/?apikey=${apikey}`
 
 
-export const FETCH_PAGE_ONE = 'FETCH_PAGE_ONE'
+export const FETCH_ALL_MOVIE = 'FETCH_ALL_MOVIE'
 
 export const CHOOSE_ONE_MOVIE = 'CHOOSE_ONE_MOVIE'
 
-export const fetchpageOne = () => (dispatch) => {
+export const fetchAllMovie = () => (dispatch) => {
   Promise.all([
     request.get(`${baseUrl}&s=superhero&page=1`),
     request.get(`${baseUrl}&s=superhero&page=2`),
@@ -31,7 +31,7 @@ export const fetchpageOne = () => (dispatch) => {
         result.push(...i.body.Search) : null)
 
       dispatch({
-      type: FETCH_PAGE_ONE,
+      type: FETCH_ALL_MOVIE,
       payload: result
     })
     .catch(err => alert(err))
