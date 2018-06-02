@@ -1,8 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import { fetchpageOne, fetchpageTwo, fetchpageThree, fetchpageFour, fetchpageFive,
-        fetchpageSix, fetchpageSeven, fetchpageEight, fetchpageNine, fetchpageTen,
-        fetchpageEleven, fetchpageTwelve, fetchpageThirteen,
+import { fetchpageOne,
         chooseOneMovie } from '../../../redux/actions/getData'
 import  Detail  from './Detail';
 
@@ -24,18 +22,6 @@ class Overview extends React.Component {
 
     componentWillMount() {
       this.props.fetchpageOne()
-      this.props.fetchpageTwo()
-      this.props.fetchpageThree()
-      this.props.fetchpageFour()
-      this.props.fetchpageFive()
-      this.props.fetchpageSix()
-      this.props.fetchpageSeven()
-      this.props.fetchpageEight()
-      this.props.fetchpageNine()
-      this.props.fetchpageTen()
-      this.props.fetchpageEleven()
-      this.props.fetchpageTwelve()
-      this.props.fetchpageThirteen()
     }
 
 
@@ -67,7 +53,4 @@ const mapStateToProps = (state) => ({
 })
 
 export default connect(mapStateToProps,
-       {fetchpageOne, fetchpageTwo, fetchpageThree, fetchpageFour, fetchpageFive,
-        fetchpageSix, fetchpageSeven, fetchpageEight, fetchpageNine, fetchpageTen,
-        fetchpageEleven, fetchpageTwelve, fetchpageThirteen,
-        chooseOneMovie})(Overview)
+       {fetchpageOne, chooseOneMovie})(Overview)
