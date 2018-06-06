@@ -1,34 +1,66 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import { fetchAllMovie,
-        chooseOneMovie } from '../../../redux/actions/getData'
-import  Detail  from './Detail';
+import { fetchAllMovie, chooseOneMovie } from '../../../redux/actions/getData'
+import  Detail  from './Detail'
+
 
 
 class Overview extends React.Component {
     constructor(props) {
         super(props);
+
         this.state = {
+          page: 1,
           movieID: "tt1384927"
         }
       }
 
-    addMovie(choiceMovie)  {
-    this.setState({
-          movieID: choiceMovie
-        });
-    };
+    onInitialSearch = (e) => {
+      e.preventDefault();
 
+      const { value } = this.input;
 
-    componentWillMount() {
-      this.props.fetchAllMovie()
+      if (value === '') {
+        return;
+      }
+
+      this.props.fetchAllMovie(value, 1)
     }
 
+    goNextPage = (e) => {
+       this.props.fetchAllMovie(this.input.value, this.state.page + 1)
+       this.setState({
+         page: this.state.page + 1
+       })
+     }
+
+     goPreviousPage = (e) => {
+       this.props.fetchAllMovie(this.input.value, this.state.page - 1)
+       this.setState({
+         page: this.state.page - 1
+       })
+     }
+
+    addMovie(choiceMovie)  {
+      this.setState({
+            movieID: choiceMovie
+          });
+    };
 
     render() {
         const { movies } = this.props
         return (
             <section className="overview">
+            <div className="page">
+              <div className="interactions">
+                <form type="submit" onSubmit={this.onInitialSearch}>
+                  <input type="text" ref={node => this.input = node} />
+                  <button type="submit">Search</button>
+                </form>
+                <button className="next" onClick={this.goPreviousPage}>pre</button>
+                <button className="next" onClick={this.goNextPage}>next</button>
+              </div>
+            </div>
             { movies.map(movie => (
               <article className="card" onClick={() => this.addMovie(movie.imdbID)} >
                   <img

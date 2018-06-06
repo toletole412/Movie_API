@@ -1,6 +1,6 @@
 import request from 'superagent'
 
-const apikey = 'your_key'
+const apikey = 'd7a26a70'
 const baseUrl = `http://www.omdbapi.com/?apikey=${apikey}`
 
 
@@ -8,36 +8,17 @@ export const FETCH_ALL_MOVIE = 'FETCH_ALL_MOVIE'
 
 export const CHOOSE_ONE_MOVIE = 'CHOOSE_ONE_MOVIE'
 
-export const fetchAllMovie = () => (dispatch) => {
-  Promise.all([
-    request.get(`${baseUrl}&s=superhero&page=1`),
-    request.get(`${baseUrl}&s=superhero&page=2`),
-    request.get(`${baseUrl}&s=superhero&page=3`),
-    request.get(`${baseUrl}&s=superhero&page=4`),
-    request.get(`${baseUrl}&s=superhero&page=5`),
-    request.get(`${baseUrl}&s=superhero&page=6`),
-    request.get(`${baseUrl}&s=superhero&page=7`),
-    request.get(`${baseUrl}&s=superhero&page=8`),
-    request.get(`${baseUrl}&s=superhero&page=9`),
-    request.get(`${baseUrl}&s=superhero&page=10`),
-    request.get(`${baseUrl}&s=superhero&page=11`),
-    request.get(`${baseUrl}&s=superhero&page=12`),
-    request.get(`${baseUrl}&s=superhero&page=13`),
-  ])
-    .then(response => {
-        const result = []
+export const fetchAllMovie = (value, page) => (dispatch) => {
+    console.log("heeeyyy")
+    request.get(`${baseUrl}&s=${value}&page=${page}`)
+      .then(response => {
 
-        response.map(i => (i.body)?
-        result.push(...i.body.Search) : null)
-
-      dispatch({
-      type: FETCH_ALL_MOVIE,
-      payload: result
-    })
-    .catch(err => alert(err))
-})
-}
-
+        dispatch({
+          type: FETCH_ALL_MOVIE,
+          payload: response.body.Search
+        })
+      })
+  }
 
 
 export const chooseOneMovie = (imdbID) => (dispatch) => {
